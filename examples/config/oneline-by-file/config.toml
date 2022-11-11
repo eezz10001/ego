@@ -1,0 +1,5 @@
+[people]
+    name = "ego"
+[logger.default]
+[server.governor]
+    enable = false

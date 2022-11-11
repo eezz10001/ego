@@ -1,0 +1,86 @@
+# This is an example .goreleaser.yml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+before:
+  hooks:
+    - go mod download
+builds:
+  - id: protoc-gen-go-errors
+    main: ./cmd/protoc-gen-go-errors
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: protoc-gen-go-errors
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+  - id: protoc-gen-go-test
+    main: ./cmd/protoc-gen-go-test
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: protoc-gen-go-test
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+  - id: protoc-gen-go-http
+    main: ./cmd/protoc-gen-go-http
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: protoc-gen-go-http
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+archives:
+  - id: protoc-gen-go-errors
+    builds:
+      -  protoc-gen-go-errors
+    name_template: "protoc-gen-go-errors-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+  - id: protoc-gen-go-test
+    builds:
+      - protoc-gen-go-test
+    name_template: "protoc-gen-go-test-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+  - id: protoc-gen-go-http
+    builds:
+      - protoc-gen-go-http
+    name_template: "protoc-gen-go-http-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'

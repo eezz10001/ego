@@ -1,0 +1,6 @@
+[people]
+    name = "haha"
+[logger.default]
+    level = "info"
+
+

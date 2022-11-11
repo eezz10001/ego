@@ -1,0 +1,6 @@
+[server.grpc]
+    port = 9202
+    enableAccessInterceptorReq = true
+    enableAccessInterceptorRes = true
+[server.governor]
+    port = 9003
